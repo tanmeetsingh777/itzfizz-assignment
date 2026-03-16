@@ -1,0 +1,160 @@
+/* ============================================================
+   App.css  –  ItzFizz Hero Section
+   All animation uses transform/opacity only (no layout reflow)
+   ============================================================ */
+
+/* ── Section: the 300vh scroll track ── */
+.section {
+  height: 300vh;
+  position: relative;
+  background: var(--clr-bg);
+}
+
+/* ── Sticky viewport frame ── */
+.track {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #d4d4d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Road strip ── */
+.road {
+  width: 100vw;
+  height: 220px;
+  background-color: var(--clr-road);
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid #333;
+  border-bottom: 3px solid #333;
+}
+
+/* Road centre line (decorative dashes) */
+.road::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(
+    to right,
+    #fff 0 40px,
+    transparent 40px 80px
+  );
+  opacity: 0.08;
+}
+
+/* ── Car image (User Uploaded) ── */
+.car-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  will-change: transform;
+}
+
+.car-img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
+  display: block;
+}
+
+/* ── Green trail that grows behind the car ── */
+.trail {
+  height: 100%;
+  background: linear-gradient(to right, #1fad58, var(--clr-trail));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  z-index: 1;
+  opacity: 0.85;
+  will-change: width;
+}
+
+/* ── WELCOME ITZFIZZ headline ── */
+.value-add {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  gap: 0.2em;
+  align-items: baseline;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.value-letter {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  color: var(--clr-headline);
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
+  line-height: 1;
+  letter-spacing: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* ── Stat boxes ── */
+.text-box {
+  opacity: 0;
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 28px 32px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  min-width: 180px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  will-change: opacity;
+  backdrop-filter: blur(2px);
+}
+
+.num-box {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+#box1 { background: var(--clr-box1); color: #111; }
+#box2 { background: var(--clr-box2); color: #111; }
+#box3 { background: var(--clr-box3); color: #fff; border: 1px solid #444; }
+#box4 { background: var(--clr-box4); color: #111; }
+
+/* ── "Below the fold" placeholder section ── */
+.after-section {
+  height: 60vh;
+  background: var(--clr-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: rgba(255,255,255,0.07);
+  letter-spacing: 0.3em;
+  user-select: none;
+}
