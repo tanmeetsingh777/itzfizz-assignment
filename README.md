@@ -3,7 +3,7 @@
 
 ## 🚀 Live Demo
 
-(Add your deployed link here)
+https://itzfizz-assigment.netlify.app/
 
 
 
@@ -12,7 +12,6 @@
 ## 📌 Features
 
 * Display car images
-* Download car images
 * Responsive UI
 * Built using modern frontend tools
 
