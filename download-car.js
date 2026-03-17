@@ -1,7 +1,7 @@
 const fs = require('fs');
 const https = require('https');
 
-// A reliable Wikimedia Commons direct link for an orange McLaren top view
+// Downloads a sample car image into the public folder.
 const url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/2018_McLaren_720S_Coupe_V8_S-A_4.0_Top.jpg/800px-2018_McLaren_720S_Coupe_V8_S-A_4.0_Top.jpg';
 const dest = 'c:/Users/Angad/Desktop/assigment/ItzFizz/public/car.jpg';
 

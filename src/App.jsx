@@ -1,16 +1,8 @@
 import { useEffect, useRef } from 'react'
 import './App.css'
 
-/*
- * GSAP + ScrollTrigger are loaded via <script> tags in index.html (CDN).
- * We grab them from the window object so Vite's module bundler is not
- * involved and there are no npm install requirements.
- */
-
-/* ── Letter data ── */
 const HEADLINE = ['W','E','L','C','O','M','E',' ','I','T','Z','F','I','Z','Z']
 
-/* ── Stat card data ── */
 const STATS = [
   {
     id: 'box1',
@@ -38,9 +30,6 @@ const STATS = [
   },
 ]
 
-/* ============================================================
-   HeroSection
-   ============================================================ */
 function HeroSection() {
   const sectionRef = useRef(null)
   const carRef     = useRef(null)
@@ -48,7 +37,7 @@ function HeroSection() {
   const valueRef   = useRef(null)
 
   useEffect(() => {
-    /* Pull GSAP from window – loaded by CDN scripts in index.html */
+    // GSAP is loaded via CDN in `index.html`, so we read it from `window`.
     const gsap          = window.gsap
     const ScrollTrigger = window.ScrollTrigger
 
@@ -67,17 +56,15 @@ function HeroSection() {
     if (!section || !car || !trail || !valueWrap) return
 
     const ctx = gsap.context(() => {
-      /* ── 1. Text Elements ── */
       const letters = valueWrap.querySelectorAll('.value-letter')
 
-      /* ── 2. Dimensions (measured once, not on every frame) ── */
-      const CAR_WIDTH     = 200 // Hardcoded to match the CSS width of the car
+      // Keep in sync with `.car-wrapper { width: 200px; }` in `App.css`.
+      const CAR_WIDTH     = 200
       const roadWidth     = window.innerWidth
       const endX          = roadWidth // Drive completely off the right edge
       const valueRect     = valueWrap.getBoundingClientRect()
       const letterOffsets = Array.from(letters).map(el => el.offsetLeft)
 
-      /* ── 3. Scroll-driven car drive ── */
       gsap.set(car, { yPercent: -50 })
       gsap.to(car, {
         x: endX,
@@ -92,10 +79,8 @@ function HeroSection() {
           onUpdate() {
             const carX = gsap.getProperty(car, 'x') + CAR_WIDTH / 2
 
-            /* Grow trail behind the car */
             gsap.set(trail, { width: carX })
 
-            /* Reveal letters dynamically with GSAP */
             letters.forEach((letter, i) => {
               const lx = valueRect.left + letterOffsets[i]
               const isRevealed = (carX + 50 >= lx)
@@ -116,7 +101,6 @@ function HeroSection() {
         },
       })
 
-      /* ── 4. Stat boxes: fade one by one as scroll progresses ── */
       const SCROLL_OFFSETS = [500, 800, 1100, 1400]
       STATS.forEach(({ id }, i) => {
         gsap.to(`#${id}`, {
@@ -138,13 +122,9 @@ function HeroSection() {
   return (
     <div className="section" ref={sectionRef}>
       <div className="track">
-
-        {/* ── Road strip ── */}
         <div className="road" id="road">
-          {/* Green trail */}
           <div className="trail" ref={trailRef} />
 
-          {/* Car Wrapper */}
           <div
             ref={carRef}
             className="car-wrapper"
@@ -158,7 +138,6 @@ function HeroSection() {
             />
           </div>
 
-          {/* Headline: W E L C O M E  I T Z F I Z Z */}
           <div className="value-add" ref={valueRef} id="valueText">
             {HEADLINE.map((letter, i) => (
               <span key={i} className="value-letter">
@@ -168,7 +147,6 @@ function HeroSection() {
           </div>
         </div>
 
-        {/* ── Stat boxes ── */}
         {STATS.map(({ id, value, label, style }) => (
           <div key={id} className="text-box" id={id} style={style}>
             <span className="num-box">{value}</span>
@@ -181,9 +159,6 @@ function HeroSection() {
   )
 }
 
-/* ============================================================
-   Root App
-   ============================================================ */
 function App() {
   return (
     <>
